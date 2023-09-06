@@ -4,13 +4,6 @@
 # 4. POST to /api/api-base/v2/passenger/config with access token to get some user's info like favorite places and their addresses
 import requests, re, sys, json
 
-def is_english(text):
-    try:
-        text.encode('ascii')
-    except UnicodeEncodeError:
-        return False
-    return True
-
 base_url = "https://app.snapp.taxi"
 session = requests.session() #all the requests will be made in this session
 
@@ -59,12 +52,7 @@ user_favorite_places = json.loads(user_info_res.text)["data"]["favorite_places"]
 print("-----------------------------------")
 for place, i in zip(user_favorite_places, range(len(user_favorite_places))): 
     print("{}:".format(i+1))
-
-    if is_english(place["name"]):
-        place_name = place["name"]
-    else:
-        place_name = place["name"][::-1]
         
-    print("User's chosen name for this place: " + place_name)
+    print("User's chosen name for this place: " + place["name"])
 
-    print("Formatted address of this place:\n" + place["location"]["formatted_address"][::-1] + "\n") # [::-1] is for reversing because the original persian address string is reversed
+    print("Formatted address of this place:\n" + place["location"]["formatted_address"] + "\n") 
