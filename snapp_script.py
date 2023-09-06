@@ -53,7 +53,7 @@ access_token = json.loads(otp_validation_res.text)["access_token"] #extracting a
 temp_unimportant_data = {"locale":"fa-IR","device_type":1,"version_code":4,"os_version":"msvfdibacOSS","device_name":"ovisosv","referrer":0}
 user_info_res = session.post(base_url + "/api/api-base/v2/passenger/config", headers={"Authorization" : "Bearer " + access_token}, json=temp_unimportant_data)
 if user_info_res.status_code != 200:
-    sys.exit(user_info_res.text)
+    sys.exit("Fetching user's info failed:\n" + user_info_res.text)
 #extracting user's favorite places:    
 user_favorite_places = json.loads(user_info_res.text)["data"]["favorite_places"]
 print("-----------------------------------")
