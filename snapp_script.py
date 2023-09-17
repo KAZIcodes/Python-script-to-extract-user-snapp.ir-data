@@ -36,7 +36,7 @@ if json.loads(otp_res.text)["status"] != "OK": #first we should turn the res str
 otp_code = input("Enter the SMS code sent to you: ")
 
 # 3:
-otp_validation_res = session.post(base_url + "/api/api-passenger-oauth/v2/auth", data={"grant_type":"sms_v2","client_id":client_id,"client_secret":client_secret,"cellphone":"+989013078187","token":otp_code,"referrer":"pwa"})
+otp_validation_res = session.post(base_url + "/api/api-passenger-oauth/v2/auth", data={"grant_type":"sms_v2","client_id":client_id,"client_secret":client_secret,"cellphone":user_number,"token":otp_code,"referrer":"pwa"})
 if otp_validation_res.status_code != 200:
     sys.exit("OTP validation operation failed!")
 access_token = json.loads(otp_validation_res.text)["access_token"] #extracting access_tojen from response  
